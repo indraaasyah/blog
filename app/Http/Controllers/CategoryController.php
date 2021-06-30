@@ -37,6 +37,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[ 
+            'name' => 'required|min:5',
+        ]);
+        
         Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -46,7 +50,7 @@ class CategoryController extends Controller
         //     'name' 
         // ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Post created successfully.');
     }
 
     /**
