@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     @if (session()->has('success'))
-      <div class="alert alert-success">
+      <div class="alert alert-info">
         {{ session()->get('success') }}
       </div>
     @endif
@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     @if (session()->has('error'))
       <div class="alert alert-danger">
         {{ session()->get('error') }}

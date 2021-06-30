@@ -6,3 +6,4 @@
  */
 
 "use strict";
+$("#exampleModal").appendTo("body");

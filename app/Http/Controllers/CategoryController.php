@@ -72,7 +72,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+       $categories = Category::findOrFail($id);
+       return view('admin.category.edit', compact('categories'));
     }
 
     /**
@@ -84,10 +85,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[ 
+            'name' => 'required|min:5',
+        ]);
+
+        $category_data = [
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ];
+
+        Category::whereId($id)->update($category_data);
+
+        return redirect()->route('category.index')->with('success', 'Post updated successfully.');
     }
 
     /**
+     * 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -95,6 +108,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categories = Category::findOrFail($id);
+        $categories->delete();
+        return redirect()->back()->with('success', 'Post deleted successfully.');
     }
 }
