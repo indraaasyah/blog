@@ -1,8 +1,9 @@
 @extends('backend.home')
 
+@section('sub-title', 'Category')
+    
 @section('content')
-<h1>Category</h1>
-
+<a href="{{ route('category.create') }}" class="btn btn-sm btn-success mb-3">Create Category</a>
 <table class="table table-striped">
   <thead>
     <tr>
