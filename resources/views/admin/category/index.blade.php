@@ -12,10 +12,10 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($categories as $category)
+      @foreach ($categories as $category => $result)
       <tr>
-        <th scope="row">{{ $category->id }}</th>
-        <td>{{ $category->name }}</td>
+        <th scope="row">{{ $category + $categories->firstItem() }}</th>
+        <td>{{ $result->name }}</td>
         <td>
           <a href="" class="btn btn-sm btn-primary">Edit</a>
           <a href="" class="btn btn-sm btn-danger">Delete</a>
@@ -24,4 +24,5 @@
       @endforeach
     </tbody>
 </table>
+  {{ $categories->links() }}
 @endsection
