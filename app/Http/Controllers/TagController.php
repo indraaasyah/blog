@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tags;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tags::paginate(10);
+        $tags = Tag::paginate(10);
         return view('admin.tag.index', compact('tags'));
     }
 
@@ -41,7 +41,7 @@ class TagController extends Controller
             'name' => 'required|min:5',
         ]);
 
-        Tags::create([
+        Tag::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
         ]);
@@ -68,7 +68,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tags = Tags::findOrFail($id);
+        $tags = Tag::findOrFail($id);
         return view('admin.tag.edit', compact('tags'));
     }
 
@@ -90,7 +90,7 @@ class TagController extends Controller
             'slug' => Str::slug($request->name)
         ];
 
-        Tags::whereId($id)->update($tags_data);
+        Tag::whereId($id)->update($tags_data);
 
         return redirect()->route('tag.index')->with('success', 'Tag updated successfully.');
     }
@@ -103,7 +103,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tags = Tags::findOrFail($id);
+        $tags = Tag::findOrFail($id);
         $tags->delete();
         return redirect()->back()->with('success', 'Post deleted successfully.');
     }
