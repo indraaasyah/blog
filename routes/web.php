@@ -12,11 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function(){
     return view('home');
 });
 
-Route::resource('/category', 'CategoryController');
+// Route::get('/home', function(){
+//     return view('home');
+// });
+
+// Route::resource('/category', 'CategoryController');
+// Route::resource('/tag', 'TagController');
+
+Route::resources([
+    '/category' => 'CategoryController',
+    '/tag' => 'TagController'
+]);
