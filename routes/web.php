@@ -24,5 +24,6 @@ Route::get('/', function () {
 
 Route::resources([
     '/category' => 'CategoryController',
-    '/tag' => 'TagController'
+    '/tag' => 'TagController',
+    '/post' => 'PostController'
 ]);

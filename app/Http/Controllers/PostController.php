@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::latest()->paginate(10);
         return view('admin.post.index', compact('posts'));
     }
 
@@ -51,7 +51,7 @@ class PostController extends Controller
 
         Post::create([
             'title' => $request->title,
-            // 'slug' => Str::slug($request->title),
+            'slug' => Str::slug($request->title),
             'category_id' => $request->category_id,
             'content' => $request->content,
             'image' => 'public/uploads/posts/'. $new_image 
