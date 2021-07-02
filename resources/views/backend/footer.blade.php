@@ -18,6 +18,7 @@
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
 <!-- JS Libraies -->
+<script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js')}}"></script>
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>

@@ -1,18 +1,19 @@
 @extends('backend.home')
-@section('sub-title', 'Create Post')
+@section('sub-title', 'Edit Post')
     
 @section('content')
 	@include('alert')
-<form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('post.update', $posts->id) }}" method="POST" enctype="multipart/form-data">
   @csrf
+  @method('PUT')
   <div class="row">
     <div class="col-12 col-md-8 col-lg-8">
       <div class="card">
         <div class="card-body">
           <div class="form-group">
             <label><span class="font-weight-bold">Title</span></label>
-            <input type="text" class="form-control" name="title" value="{{old('title')}}">
-            @error('title')
+            <input type="text" class="form-control" name="title" value="{{ $posts->title }}">
+            @error('name')
               <div class="text-danger mt-2">
                 {{ $message }}
               </div>
@@ -20,29 +21,36 @@
           </div>
           <div class="form-group">
             <label><span class="font-weight-bold">Category</span></label>
-            <select name="category_id" id="" class="form-control" value="{{old('category_id')}}">                                              
+            <select name="category_id" id="" class="form-control">                                              
               <option value="" holder>Select Category</option>
               @foreach ($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
+              <option value="{{ $category->id }}"
+                @if ($category->id == $posts->category_id)
+                    selected
+                @endif>
+                    {{ $category->name }}
+              </option>
               @endforeach
             </select>
-            @error('category_id')
-              <div class="text-danger mt-2">
-                {{ $message }}
-              </div>
-            @enderror
           </div>
           <div class="form-group">
             <label><span class="font-weight-bold">Select Tag</span></label>
             <select class="form-control select2" multiple="" name="tags[]">
               @foreach ($tags as $tag)
-                <option value="{{ $tag->id }}">{{ $tag->name}}</option>  
+                <option value="{{ $tag->id }}"
+                  @foreach ($posts->tags as $value)
+                    @if ($tag->id == $value->id)
+                      selected
+                    @endif
+                  @endforeach>
+                    {{ $tag->name}}
+                </option>  
               @endforeach
             </select>
           </div>
           <div class="form-group">
             <label><span class="font-weight-bold">Content</span></label>
-            <textarea class="form-control" name="content" value="{{old('content')}}" rows="20" style="height:100%" ></textarea>
+            <textarea class="form-control" name="content" rows="20" style="height:100%" >{{ $posts->content }}</textarea>
             @error('content')
               <div class="text-danger mt-2">
                 {{ $message }}
@@ -51,18 +59,13 @@
           </div>
           <div class="form-group">
             <label><span>Image Thumbnail</span></label>
-            <input type="file" class="form-control" name="image" value="{{old('image')}}">
-            @error('image')
-            <div class="text-danger mt-2">
-              {{ $message }}
-            </div>
-            @enderror
+            <input type="file" class="form-control" name="image">
           </div>
         </div>
           
       </div>
       <div>
-        <button class="btn btn-sm btn-primary">Save Post</button>
+        <button class="btn btn-sm btn-primary">Update Post</button>
       </div>
     </div>
   </div>

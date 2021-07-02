@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,16 +28,12 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all(); // menampilkan data tag di form select tag
         $categories = Category::all(); // menampilkan data kategori di form select category
-        return view('admin.post.create', compact('categories'));
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -49,13 +46,16 @@ class PostController extends Controller
         $image = $request->image; //mengambil gambar dari hasil validate
         $new_image = time().$image->getClientOriginalName(); //mengubah nama gambar agar unik
 
-        Post::create([
+        $posts = Post::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'category_id' => $request->category_id,
             'content' => $request->content,
-            'image' => 'public/uploads/posts/'. $new_image 
+            'image' => 'public/uploads/posts/'. $new_image,
         ]);
+
+        $posts->tags()->attach($request->tags);
+
 
         $image->move('public/uploads/posts/', $new_image); //memindahkan gambar yg diupload ke dalam folder public
         return redirect()->back()->with('success', 'Post created successfully');
@@ -78,21 +78,51 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+
+    public function edit($id)
     {
-        //
+        // $posts = Post::find(1);
+        $posts = Post::findOrFail($id);
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('admin.post.edit', compact('posts','tags','categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'category_id' => 'required',
+            'content' => 'required',
+        ]);
+
+        if ($request->has('image')) {
+            $image = $request->image;
+            $new_image = time().$image->getClientOriginalName();
+            $image->move('public/uploads/posts/', $new_image); //memindahkan gambar yg diupload ke dalam folder public
+            
+            $posts_data = [
+                'title' => $request->title,
+                'slug' => Str::slug($request->title),
+                'category_id' => $request->category_id,
+                'content' => $request->content,
+                'image' => 'public/uploads/posts/'. $new_image 
+            ];
+        }else{
+            $posts_data = [
+                'title' => $request->title,
+                'slug' => Str::slug($request->title),
+                'category_id' => $request->category_id,
+                'content' => $request->content,
+            ];
+        }
+
+        // $post->tags()->detach();
+        $post->tags()->sync($request->tags);
+        $post->update($posts_data);
+
+        return redirect()->back()->with('success', 'Post updated successfully');
     }
 
     /**
