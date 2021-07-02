@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-// Route::get('/home', function(){
-//     return view('home');
-// });
+Route::get('/home', function(){
+    return view('home');
+})->name('home');
 
 // Route::resource('/category', 'CategoryController');
 // Route::resource('/tag', 'TagController');

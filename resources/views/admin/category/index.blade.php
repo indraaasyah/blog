@@ -4,7 +4,7 @@
     
 @section('content')
 @include('alert')
-<a href="{{ route('category.create') }}" class="btn btn-sm btn-success mb-3">Create Category</a>
+<a href="{{ route('category.create') }}" class="btn btn-sm btn-info mb-3">Create Category</a>
 <table class="table table-striped">
   <thead>
     <tr>

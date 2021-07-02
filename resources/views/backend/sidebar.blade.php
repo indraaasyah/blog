@@ -8,12 +8,8 @@
       </div>
       <ul class="sidebar-menu">
           <li class="menu-header">Dashboard</li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-home"></i><span>Dashboard</span></a>
-            <ul class="dropdown-menu">
-              <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-              <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
-            </ul>
+          <li>
+            <a class="nav-link" href="{{ route('home')}}"><i class="fas fa-home"></i><span>Dashboard</span></a>
           </li>
           <li class="menu-header">Starter</li>
           <li class="nav-item dropdown">
@@ -29,7 +25,7 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-th"></i> <span>Tag</span></a>
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-bookmark"></i> <span>Tag</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ route('tag.index')}}">List Tags</a></li>
             </ul>
