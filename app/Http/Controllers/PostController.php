@@ -6,6 +6,7 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -52,6 +53,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'content' => $request->content,
             'image' => 'public/uploads/posts/'. $new_image,
+            'users_id' => Auth::id(),
         ]);
 
         $posts->tags()->attach($request->tags);

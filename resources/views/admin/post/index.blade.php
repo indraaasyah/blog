@@ -13,6 +13,7 @@
           <th scope="col">Post Title</th>
           <th scope="col">Post Category</th>
           <th scope="col">Post Tags</th>
+          <th scope="col">Author</th>
           <th scope="col">Thumbnail</th>
           <th scope="col">Published</th>
           <th scope="col">Action</th>
@@ -23,14 +24,21 @@
         <tr>
           <th scope="row">{{ $post + $posts->firstItem() }}</th>
           <td>{{ $result->title }}</td>
-          <td>{{ $result->category->name }}</td>
+          <td>
+            <a href="#">
+              <h5><span class="badge badge-info">{{ $result->category->name }}</span></h5>
+            </a>
+          </td>
           <td>
             @foreach ($result->tags as $tag)
               <ul>
-                <li>{{ $tag->name }}</li>
+                <a href="#">
+                  <h6><span class="badge badge-pill badge-success">{{ $tag->name }}</span></h6>
+                </a>
               </ul>
             @endforeach
           </td>
+          <td>{{ $result->users->name}}</td>
           <td> <img src="{{ asset($result->image) }}" alt="thumbnail" class="img-fluid" style="width: 100px"></td>
           <td>{{ $result->created_at->format("d F, Y") }}</td>
           <td>
