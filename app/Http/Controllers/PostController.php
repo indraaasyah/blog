@@ -131,8 +131,33 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $posts = Post::findOrFail($id);
+        $posts->delete();
+
+        return redirect()->back()->with('success', 'Post deleted successfully. Your post moved to trash.');
+    }
+
+    public function show_deleted()
+    {
+        $posts = Post::onlyTrashed()->paginate(10);
+        return view('admin.post.deleted', compact('posts'));
+    }
+
+    public function restore($id)
+    {
+        $posts = Post::withTrashed()->where('id', $id)->first();
+        $posts->restore();
+
+        return redirect()->back()->with('success', 'Post restored successfully. Your post is back to list posts.');
+    }
+
+    public function kill($id)
+    {
+        $posts = Post::withTrashed()->where('id', $id)->first();
+        $posts->forceDelete();
+
+        return redirect()->back()->with('success', 'Post deleted successfully. Your post is deleted permanently.');
     }
 }

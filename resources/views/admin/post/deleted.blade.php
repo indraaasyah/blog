@@ -1,10 +1,10 @@
 @extends('backend.home')
 
-@section('sub-title', 'Post')
+@section('sub-title', 'Deleted Post')
     
 @section('content')
 @include('alert')
-<a href="{{ route('post.create') }}" class="btn btn-sm btn-info mb-3">Create Post</a>
+
 <div class="post-content-table">
   <table class="table table-striped">
     <thead>
@@ -34,10 +34,10 @@
           <td> <img src="{{ asset($result->image) }}" alt="thumbnail" class="img-fluid" style="width: 100px"></td>
           <td>{{ $result->created_at->format("d F, Y") }}</td>
           <td>
-            <form action="{{ route('post.destroy', $result->id) }}" method="post">
+            <form action="{{ route('post.kill', $result->id) }}" method="post">
               @method('delete')
               @csrf
-              <a href="{{ route('post.edit', $result->id) }}" class="btn btn-sm btn-primary">Edit</a>
+              <a href="{{ route('post.restore', $result->id) }}" class="btn btn-sm btn-info">Restore</a>
               <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           </td>

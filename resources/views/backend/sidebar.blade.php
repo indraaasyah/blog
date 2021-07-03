@@ -16,6 +16,7 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Post</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ route('post.index')}}">List Posts</a></li>
+              <li><a class="nav-link" href="{{ route('post.show_deleted')}}">Trash</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
