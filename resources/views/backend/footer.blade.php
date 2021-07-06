@@ -18,6 +18,7 @@
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
 <!-- JS Libraies -->
+<script src="{{ asset('assets/node_modules/chart.js/dist/Chart.min.js')}}"></script>
 <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="{{ asset('assets/node_modules/izitoast/dist/js/iziToast.min.js')}}"></script>
 <script src="{{ asset('assets/node_modules/sweetalert/dist/sweetalert.min.js')}}"></script>

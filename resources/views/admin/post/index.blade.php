@@ -23,7 +23,8 @@
         @foreach ($posts as $post => $result)
         <tr>
           <th scope="row">{{ $post + $posts->firstItem() }}</th>
-          <td>{{ $result->title }}</td>
+          {{-- <td><a href="{{ route('post.show', $result->slug) }}">{{ $result->title}}</a></td> --}}
+          <td><a href="#">{{ $result->title}}</a></td>
           <td>
             <a href="#">
               <h5><span class="badge badge-info">{{ $result->category->name }}</span></h5>

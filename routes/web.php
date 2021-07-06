@@ -16,21 +16,27 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'BlogController@index');
+// Route::get('/post_content', function () {
+//         return view('blog.post_content');
+//     });
+Route::get('/isi_post/{slug}', 'BlogController@isi_blog')->name('blog.isi');
 
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     
-    Route::resource('/category', 'CategoryController');
-    Route::resource('/tag', 'TagController');
-    
     Route::get('/post/show_deleted', 'PostController@show_deleted')->name('post.show_deleted');
     Route::get('/post/restore/{id}', 'PostController@restore')->name('post.restore');
     Route::delete('/post/kill/{id}', 'PostController@kill')->name('post.kill');
     Route::resource('/post', 'PostController');
+    
+    Route::resource('/category', 'CategoryController');
+    Route::resource('/tag', 'TagController');
+    Route::resource('/user', 'UserController');
 });
 
 
