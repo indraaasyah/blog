@@ -16,14 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', 'BlogController@index');
-// Route::get('/post_content', function () {
-//         return view('blog.post_content');
-//     });
-Route::get('/isi_post/{slug}', 'BlogController@isi_blog')->name('blog.isi');
+
+Route::get('/post_content/{slug}', 'BlogController@post_content')->name('blog.content');
+Route::get('/list_post', 'BlogController@list_content')->name('blog.list');
 
 
 Route::group(['middleware' => 'auth'], function(){

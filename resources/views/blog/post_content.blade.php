@@ -31,8 +31,8 @@
 	<div class="col-md-8">
 		
 		<div class="section-row">
-			<h1></h1>
-			<p>{{ $content->content}}</p>
+			
+			<p>{!! $content->content !!}</p>
 	
 			
 		</div>

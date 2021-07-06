@@ -84,7 +84,7 @@
             @foreach ($posts as $post)
 						<div class="col-md-6">
               <div class="post">
-								<a class="post-img" href="{{ route('blog.isi', $post->slug)}}"><img src="{{ $post->image }}" alt="" style="height: 300px"></a>
+								<a class="post-img" href="{{ route('blog.content', $post->slug)}}"><img src="{{ $post->image }}" alt="" style="height: 270px"></a>
 								<div class="post-body">
                   <div class="post-category">
 										<a href="category.html">{{ $post->category->name }}</a>

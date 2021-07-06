@@ -41,7 +41,7 @@ class PostController extends Controller
             'title' => 'required',
             'category_id' => 'required',
             'content' => 'required',
-            'image' => 'required'
+            'image' => 'required|mimes:jpg,jpeg,png,bmp,tiff'
         ]);
 
         $image = $request->image; //mengambil gambar dari hasil validate

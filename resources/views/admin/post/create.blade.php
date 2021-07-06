@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
             <label><span class="font-weight-bold">Content</span></label>
-            <textarea class="form-control" name="content" value="{{old('content')}}" rows="20" style="height:100%" ></textarea>
+            <textarea class="form-control" name="content" value="{{old('content')}}" id="content"></textarea>
             @error('content')
               <div class="text-danger mt-2">
                 {{ $message }}
@@ -67,5 +67,10 @@
     </div>
   </div>
 </form>
+
+<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace( 'content' );
+</script>
 
 @endsection
