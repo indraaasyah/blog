@@ -58,7 +58,7 @@
 						<button class="aside-btn"><i class="fa fa-bars"></i></button>
 						<button class="search-btn"><i class="fa fa-search"></i></button>
 						<div id="nav-search">
-							<form>
+							<form action="{{ route('blog.search')}}" method="GET">
 								<input class="input" name="search" placeholder="Enter your search...">
 							</form>
 							<button class="nav-close search-close">
@@ -82,8 +82,8 @@
 							<div class="dropdown">
 								<div class="dropdown-body">
 									<ul class="dropdown-list">
-										@foreach ($category_widget as $categories)
-											<li><a href="#">{{$categories->name}}</a></li>  
+										@foreach ($category_widget as $header_category)
+											<li><a href="{{ route('blog.category', $header_category->slug) }}">{{$header_category->name}}</a></li>  
 										@endforeach
 									</ul>
 								</div>
@@ -99,19 +99,16 @@
 			<!-- Aside Nav -->
 			<div id="nav-aside">
 				<ul class="nav-aside-menu">
-					<li><a href="index.html">Home</a></li>
-					<li class="has-dropdown"><a>Categories</a>
+					<li><a href="{{ url('') }}">Home</a></li>
+					<li class="has-dropdown">
+						<a>Categories</a>
 						<ul class="dropdown">
-							<li><a href="#">Lifestyle</a></li>
-							<li><a href="#">Fashion</a></li>
-							<li><a href="#">Technology</a></li>
-							<li><a href="#">Travel</a></li>
-							<li><a href="#">Health</a></li>
+						@foreach ($category_widget as $header_category)
+							<li><a href="{{ route('blog.category', $header_category->slug) }}">{{$header_category->name}}</a></li>  
+						@endforeach
 						</ul>
 					</li>
-					<li><a href="about.html">About Us</a></li>
-					<li><a href="contact.html">Contacts</a></li>
-					<li><a href="#">Advertise</a></li>
+					<li><a href="{{ route('blog.list')}}">Article</a></li>
 				</ul>
 				<button class="nav-close nav-aside-close"><span></span></button>
 			</div>

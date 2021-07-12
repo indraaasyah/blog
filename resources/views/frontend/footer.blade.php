@@ -24,7 +24,7 @@
 						<div class="category-widget">
 							<ul>
 								@foreach ($category_widget as $footer_category)
-									<li><a href="#">{{$footer_category->name}} <span>{{$footer_category->posts->count()}}</span></a></li>  
+									<li><a href="{{ route('blog.category', $footer_category->slug) }}">{{$footer_category->name}} <span>{{$footer_category->posts->count()}}</span></a></li>  
 								@endforeach
 							</ul>
 						</div>

@@ -72,7 +72,7 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<!-- row -->
 					<div class="row">
 						<div class="col-md-12">
@@ -87,9 +87,9 @@
 								<a class="post-img" href="{{ route('blog.content', $post->slug)}}"><img src="{{ $post->image }}" alt="" style="height: 270px"></a>
 								<div class="post-body">
                   <div class="post-category">
-										<a href="category.html">{{ $post->category->name }}</a>
+										<a href="{{ route('blog.category', $post->category->slug) }}">{{ $post->category->name }}</a>
 									</div>
-									<h3 class="post-title"><a href="blog-post.html">{{ $post->title }}</a></h3>
+									<h3 class="post-title"><a href="{{ route('blog.content', $post->slug)}}">{{ $post->title }}</a></h3>
 									<ul class="post-meta">
                     <li><a href="author.html">{{ $post->users->name }}</a></li>
 										<li>{{ $post->created_at->format("d F, Y") }}</li>
@@ -105,14 +105,17 @@
 					<!-- /row -->
           {{-- {{ $posts->links() }} --}}
 				</div>
+				
+				<div class="section-row text-center">
+					<a href="{{ route('blog.list')}}" class="secondary-button">More Article</a>
+				</div>
       
-      
-      {{-- </div>
+      </div>
       <!-- /row -->
       </div>
       <!-- /container -->
       </div>
-      <!-- /SECTION --> --}}
+      <!-- /SECTION -->
 
             
 @endsection

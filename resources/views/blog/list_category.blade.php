@@ -37,7 +37,7 @@
         <a class="post-img" href="{{ route('blog.content', $list->slug)}}"><img src="{{ $list->image }}"" alt=""></a>
         <div class="post-body">
           <div class="post-category">
-            <a href="{{ route('blog.category', $list->category->slug) }}">{{$list->category->name}}</a>
+            <a href="category.html">{{$list->category->name}}</a>
           </div>
           <h3 class="post-title"><a href="{{ route('blog.content', $list->slug)}}">{{$list->title}}</a></h3>
           <ul class="post-meta">

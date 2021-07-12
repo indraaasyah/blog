@@ -8,7 +8,7 @@
       
       @yield('isi')
       
-      @include('frontend.widget')
+      {{-- @include('frontend.widget') --}}
 
   </div>
 </div>

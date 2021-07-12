@@ -31,4 +31,20 @@ class BlogController extends Controller
     	$data = Post::latest()->paginate(6);
         return view('blog.list_content', compact('data','category_widget'));       
     }
+    
+    public function list_category(Category $category)
+    {
+        $category_widget = Category::all();
+
+    	// $data = Post::latest()->paginate(6);
+    	$data = $category->posts()->latest()->paginate(6);
+        return view('blog.list_content', compact('data','category_widget'));       
+    }
+
+    public function search(Request $request)    {
+        $category_widget = Category::all();
+
+    	$data = Post::where('title', $request->search)->orWhere('title', 'like', '%'.$request->search.'%')->paginate(6);
+        return view('blog.list_content', compact('data','category_widget'));
+    }
 }
